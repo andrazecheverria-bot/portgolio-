@@ -66,6 +66,12 @@
             margin-top: 60px;
             animation: fadeIn 1.2s ease-in;
         }
+        /* Background attachment solo en desktop */
+        @media (min-width: 1024px) {
+            .hero {
+                background-attachment: fixed;
+            }
+        }
 
         /* Overlay oscuro para legibilidad */
         .hero::before {
