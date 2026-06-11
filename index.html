@@ -53,12 +53,45 @@
         .hero {
             height: 100vh;
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: #fff;
             margin-top: 60px;
+            animation: fadeIn 1.2s ease-in;
+        }
+
+        /* Overlay oscuro para legibilidad */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animación fade */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         .hero-content h2 {
@@ -151,6 +184,42 @@
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #1a1a1a;
+            background: transparent;
+            color: #1a1a1a;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .filter-btn.active {
+            background: #ffd700;
+            color: #000;
+            border-color: #ffd700;
+        }
+
+        .gallery-item.hidden {
+            display: none;
         }
 
         .gallery-item {
@@ -260,13 +329,23 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            transition: background 0.3s;
+            transition: background 0.3s, color 0.3s;
             font-size: 1.3rem;
         }
 
         .social-links a:hover {
             background: #ffd700;
             color: #000;
+        }
+
+        .social-links svg {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover svg {
+            transform: scale(1.1);
         }
 
         .form-group {
@@ -365,7 +444,7 @@
 <body>
     <!-- Header -->
     <header>
-        <h1>Andraz Echeverria</h1>
+        <h1>ANDRAZ</h1>
         <nav>
             <a href="#home">Home</a>
             <a href="#servicos">Serviços</a>
@@ -405,53 +484,72 @@
     <!-- Portfolio Section -->
     <section class="portfolio" id="portfolio">
         <h3>Portfólio</h3>
+        
+        <!-- FILTROS DE CATEGORÍAS -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="eventos">Eventos</button>
+            <button class="filter-btn" data-filter="deportes">Deportes</button>
+            <button class="filter-btn" data-filter="casas">Casas</button>
+            <button class="filter-btn" data-filter="videos">Videos</button>
+        </div>
+
+        <!-- GALERÍA CON CATEGORÍAS -->
         <div class="gallery">
-            <!-- FOTO 1 - REEMPLAZA LA URL CON TU FOTO -->
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/800x600?text=Tu+Foto+1" alt="Proyecto 1">
-                <div class="gallery-overlay">
-                    <div>Fotografía</div>
-                </div>
+            <!-- EVENTOS - Reemplaza las URLs -->
+            <div class="gallery-item" data-category="eventos">
+                <img src="https://via.placeholder.com/800x600?text=Evento+1" alt="Evento 1">
+                <div class="gallery-overlay"><div>Evento 1</div></div>
+            </div>
+            <div class="gallery-item" data-category="eventos">
+                <img src="https://via.placeholder.com/800x600?text=Evento+2" alt="Evento 2">
+                <div class="gallery-overlay"><div>Evento 2</div></div>
+            </div>
+            <div class="gallery-item" data-category="eventos">
+                <img src="https://via.placeholder.com/800x600?text=Evento+3" alt="Evento 3">
+                <div class="gallery-overlay"><div>Evento 3</div></div>
             </div>
 
-            <!-- FOTO 2 - REEMPLAZA LA URL CON TU FOTO -->
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/800x600?text=Tu+Foto+2" alt="Proyecto 2">
-                <div class="gallery-overlay">
-                    <div>Evento</div>
-                </div>
+            <!-- DEPORTES - Reemplaza las URLs -->
+            <div class="gallery-item" data-category="deportes">
+                <img src="https://via.placeholder.com/800x600?text=Deporte+1" alt="Deporte 1">
+                <div class="gallery-overlay"><div>Deporte 1</div></div>
+            </div>
+            <div class="gallery-item" data-category="deportes">
+                <img src="https://via.placeholder.com/800x600?text=Deporte+2" alt="Deporte 2">
+                <div class="gallery-overlay"><div>Deporte 2</div></div>
+            </div>
+            <div class="gallery-item" data-category="deportes">
+                <img src="https://via.placeholder.com/800x600?text=Deporte+3" alt="Deporte 3">
+                <div class="gallery-overlay"><div>Deporte 3</div></div>
             </div>
 
-            <!-- FOTO 3 - REEMPLAZA LA URL CON TU FOTO -->
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/800x600?text=Tu+Foto+3" alt="Proyecto 3">
-                <div class="gallery-overlay">
-                    <div>Retrato</div>
-                </div>
+            <!-- CASAS - Reemplaza las URLs -->
+            <div class="gallery-item" data-category="casas">
+                <img src="https://via.placeholder.com/800x600?text=Casa+1" alt="Casa 1">
+                <div class="gallery-overlay"><div>Casa 1</div></div>
+            </div>
+            <div class="gallery-item" data-category="casas">
+                <img src="https://via.placeholder.com/800x600?text=Casa+2" alt="Casa 2">
+                <div class="gallery-overlay"><div>Casa 2</div></div>
+            </div>
+            <div class="gallery-item" data-category="casas">
+                <img src="https://via.placeholder.com/800x600?text=Casa+3" alt="Casa 3">
+                <div class="gallery-overlay"><div>Casa 3</div></div>
             </div>
 
-            <!-- VIDEO 1 - REEMPLAZA video_id_aqui CON TU VIDEO DE YOUTUBE -->
-            <div class="gallery-item video-item">
+            <!-- VIDEOS - Reemplaza los IDs -->
+            <div class="gallery-item video-item" data-category="videos">
                 <iframe src="https://www.youtube.com/embed/zt3TG7QkXdQ" title="Video 1" allowfullscreen loading="lazy"></iframe>
-                <div class="gallery-overlay">
-                    <div>▶ Video</div>
-                </div>
+                <div class="gallery-overlay"><div>▶ Video 1</div></div>
             </div>
-
-            <!-- VIDEO 2 - REEMPLAZA video_id_aqui CON TU VIDEO DE YOUTUBE -->
-            <div class="gallery-item video-item">
-                <iframe src="https://www.youtube.com/embed/rj1VLJ5PlgE" title="Video 2" allowfullscreen loading="lazy"></iframe>
-                <div class="gallery-overlay">
-                    <div>▶ Video</div>
-                </div>
+            <div class="gallery-item video-item" data-category="videos">
+                <iframe src="https://www.youtube.com/embed/video_id_aqui" title="Video 2" allowfullscreen loading="lazy"></iframe>
+                <div class="gallery-overlay"><div>▶ Video 2</div></div>
             </div>
-
-            <!-- VIDEO 3 - REEMPLAZA video_id_aqui CON TU VIDEO DE YOUTUBE -->
-            <div class="gallery-item video-item">
+            <div class="gallery-item video-item" data-category="videos">
                 <iframe src="https://www.youtube.com/embed/video_id_aqui" title="Video 3" allowfullscreen loading="lazy"></iframe>
-                <div class="gallery-overlay">
-                    <div>▶ Video</div>
-                </div>
+                <div class="gallery-overlay"><div>▶ Video 3</div></div>
             </div>
         </div>
     </section>
@@ -468,8 +566,16 @@
                 
                 <h4 style="margin-top: 2rem;">Siga-me nas Redes</h4>
                 <div class="social-links">
-                    <a href="https://instagram.com/andrazecheverria.ph" target="_blank" title="Instagram">📷</a>
-                    <a href="https://wa.me/5551998700211" target="_blank" title="WhatsApp">💬</a>
+                    <a href="https://instagram.com/andrazecheverria.ph" target="_blank" title="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.322a1.44 1.44 0 110-2.881 1.44 1.44 0 010 2.881z"/>
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/5551998700211" target="_blank" title="WhatsApp">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.05.549 3.997 1.514 5.682L0 24l6.594-1.445C8.256 23.281 10.063 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.657 0-3.238-.397-4.623-1.095l-.332-.181-3.427.75.761-3.385-.197-.314C1.754 15.89 1 14.081 1 12c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10zm5.491-7.662c-.299-.149-1.761-.867-2.033-.967-.272-.1-.47-.15-.668.15-.199.299-.768.966-.941 1.164-.174.199-.347.224-.646.075-.299-.149-1.258-.463-2.393-1.476-.885-.789-1.481-1.762-1.654-2.06-.173-.299-.018-.46.13-.608.134-.134.299-.348.448-.522.149-.174.198-.299.298-.498.099-.198.05-.371-.025-.521-.075-.15-.668-1.613-.915-2.208-.243-.581-.488-.501-.669-.511-.173-.009-.372-.011-.571-.011-.199 0-.522.074-.796.372-.273.298-1.041 1.017-1.041 2.479 0 1.462 1.065 2.876 1.213 3.075.149.199 2.095 3.201 5.076 4.487.709.307 1.262.489 1.694.625.712.226 1.36.194 1.871.117.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.571-.347z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
 
@@ -509,6 +615,26 @@
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
+            });
+        });
+
+        // Filter de categorías
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                
+                // Actualizar botones activos
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filtrar items
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
             });
         });
 
